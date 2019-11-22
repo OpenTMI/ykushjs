@@ -2,7 +2,11 @@
 Jepkit Ykush module
 
 
-# API
+## Requirements
+* node 8, 10 or 12
+* `ykushcmd` - should be available in `$PATH` (https://github.com/Yepkit/ykush)
+
+## API
 
 ```js
 const Ykush = require('Ykush');
