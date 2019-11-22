@@ -1,6 +1,5 @@
 // 3rd party modules
 const execa = require('execa');
-const _ = require('lodash');
 const invariant = require('invariant');
 
 class Ykush {
@@ -64,8 +63,7 @@ class Ykush {
             return [];
         }
         const arr = JSON.parse(str);
-        const ykushes = arr.map(id => ({id}));
-        return ykushes;
+        return arr.map(id => ({id}));
     }
 }
 

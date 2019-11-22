@@ -3,7 +3,6 @@ const Ykush = require('./Ykush');
 
 
 module.exports = class Ykushxs extends Ykush {
-
     get _args() { // eslint-disable-line class-methods-use-this
         return ['ykushxs'];
     }
