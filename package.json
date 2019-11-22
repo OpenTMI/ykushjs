@@ -31,8 +31,7 @@
   "homepage": "https://github.com/opentmi/ykushjs#readme",
   "dependencies": {
     "execa": "^2.0.5",
-    "invariant": "^2.2.4",
-    "lodash": "^4.17.15"
+    "invariant": "^2.2.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
