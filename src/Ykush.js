@@ -10,7 +10,7 @@ class Ykush {
     }
 
     get _ykushcmd() { // eslint-disable-line class-methods-use-this
-    /**
+        /**
          * get ykushcmd - should be available in $PATH
          */
         return 'ykushcmd';
@@ -25,7 +25,7 @@ class Ykush {
         this.logger.debug(`ykush cmd: 'cmd ${args.join(' ')}'`);
         const {stdout} = await Ykush.execa(cmd, args);
         this.logger.silly(`stdout: ${stdout}`);
-        return {};
+        return {stdout};
     }
 
     async powerAllOn() {
@@ -55,15 +55,19 @@ class Ykush {
         return this._runYkushCmd(args);
     }
 
-    async detect() {
+    async list() {
         const args = [...this._args, '-l'];
         const {stdout} = await this._runYkushCmd(args);
-        const str = stdout.slice(stdout.indexOf('[')).trim();
-        if (!str) {
+        if (stdout.indexOf('No YKUSH') !== -1) {
             return [];
         }
-        const arr = JSON.parse(str);
-        return arr.map(id => ({id}));
+        return stdout.split('\n').reduce((prev, cur) => {
+            const match = cur.match(/Board found with serial number: (.*)/);
+            if (match) {
+                prev.push({id: match[1]});
+            }
+            return prev;
+        }, []);
     }
 }
 

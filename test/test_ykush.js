@@ -42,4 +42,13 @@ describe('Ykush', function () {
         await ykush.powerOff({channel: 1});
         expect(Ykush.execa.calledOnceWith('ykushcmd', ['-s', '123', '-d', '1'])).to.be.true;
     });
+    it('list', async function () {
+        Ykush.execa.resolves({
+            stdout: 'Attached YKUSH Boards:\n'
+                + '1. Board found with serial number: YK17125\n'
+                + '2. Board found with serial number: YK21493'
+        });
+        const list = await new Ykush('', {logger}).list();
+        expect(list).to.be.deep.equal([{id: 'YK17125'}, {id: 'YK21493'}]);
+    });
 });
