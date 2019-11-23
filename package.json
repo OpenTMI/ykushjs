@@ -1,9 +1,8 @@
 {
   "name": "ykushjs",
   "version": "0.1.0",
-  "description": "Jepkit Ykush contol library",
+  "description": "Jepkit Ykush control library",
   "scripts": {
-    "start": "bin/server.js",
     "test": "NODE_ENV=test mocha --recursive --reporter spec",
     "coverage": "NODE_ENV=test MOCHA_FILE=junit/test-results.xml nyc --reporter=lcov --reporter=text --reporter=html mocha --reporter mocha-circleci-reporter --recursive",
     "lint": "node node_modules/eslint/bin/eslint .",
