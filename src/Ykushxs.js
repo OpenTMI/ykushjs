@@ -3,19 +3,29 @@ const Ykush = require('./Ykush');
 
 
 module.exports = class Ykushxs extends Ykush {
-    get _args() { // eslint-disable-line class-methods-use-this
+    constructor(...args) {
+        super(...args);
+        this.channelCount = 1;
+        this._prefix = Ykushxs.Prefix;
+    }
+
+    static get Prefix() {
         return ['ykushxs'];
     }
 
-    async powerOn({channel}) {
+    async powerOn({channel = 1} = {}) {
         this._validateChannel(channel);
-        const args = ['ykushxs', '-s', this._serialNumber, '-u'];
-        return this._runYkushCmd(args);
+        const args = [...this._prefix, '-s', this._serialNumber, '-u'];
+        return Ykush._runYkushCmd(args, this.logger);
     }
 
-    async powerOff({channel}) {
+    async powerOff({channel = 1} = {}) {
         this._validateChannel(channel);
-        const args = ['ykushxs', '-s', this._serialNumber, '-d'];
-        return this._runYkushCmd(args);
+        const args = [...this._prefix, '-s', this._serialNumber, '-d'];
+        return Ykush._runYkushCmd(args, this.logger);
+    }
+
+    static async list(logger) {
+        return Ykush._list(logger, Ykushxs.Prefix);
     }
 };

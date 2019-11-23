@@ -48,7 +48,15 @@ describe('Ykush', function () {
                 + '1. Board found with serial number: YK17125\n'
                 + '2. Board found with serial number: YK21493'
         });
-        const list = await new Ykush('', {logger}).list();
+        const list = await Ykush.list(logger);
         expect(list).to.be.deep.equal([{id: 'YK17125'}, {id: 'YK21493'}]);
+    });
+    it('list no found', async function () {
+        Ykush.execa.resolves({
+            stdout: 'Attached YKUSHXS Boards:\n'
+                + 'No YKUSH boards found'
+        });
+        const list = await Ykush.list(logger);
+        expect(list).to.be.deep.equal([]);
     });
 });
