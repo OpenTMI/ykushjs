@@ -1,6 +1,11 @@
+const path = require('path');
 // 3rd party modules
 const execa = require('execa');
 const invariant = require('invariant');
+
+const ykushcmdPath = path.join(__dirname, '..', 'bin', process.platform);
+const YkushCmd = path.join(ykushcmdPath, 'ykushcmd');
+
 
 class Ykush {
     constructor(serialNumber, {logger}) {
@@ -12,13 +17,6 @@ class Ykush {
 
     get serialNumber() {
         return this._serialNumber;
-    }
-
-    static get YkushCmd() { // eslint-disable-line class-methods-use-this
-        /**
-         * get ykushcmd - should be available in $PATH
-         */
-        return 'ykushcmd';
     }
 
     static async _runYkushCmd(args, logger) {
@@ -81,4 +79,5 @@ class Ykush {
 }
 
 Ykush.execa = execa;
+Ykush.YkushCmd = YkushCmd;
 module.exports = Ykush;

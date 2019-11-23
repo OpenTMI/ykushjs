@@ -10,18 +10,17 @@ const {expect} = chai;
 
 
 describe('Ykushxs', function () {
-    const logger = {
-        debug: () => {
-        },
-        silly: () => {
-        }
-    };
+    let ykushCmdBack;
+    const logger = {debug: () => {}, silly: () => {}};
     beforeEach(function () {
         stub(Ykush, 'execa');
+        ykushCmdBack = Ykush.YkushCmd;
+        Ykush.YkushCmd = 'ykushcmd';
         Ykush.execa.resolves({stdout: ''});
     });
     afterEach(function () {
         Ykush.execa.restore();
+        Ykush.YkushCmd = ykushCmdBack;
     });
     it('is ok', function () {
         const obj = new Ykushxs('123', {logger});

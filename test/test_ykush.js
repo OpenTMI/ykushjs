@@ -1,3 +1,4 @@
+const fs = require('fs');
 // 3rd party modules
 const chai = require('chai');
 const {stub} = require('sinon');
@@ -9,14 +10,34 @@ chai.use(chaiAsPromised);
 const {expect} = chai;
 
 
+describe('YkushCmd', function () {
+    const logger = {debug: () => {}, silly: () => {}};
+    it('valid path', function () {
+        let binpath = `bin/${process.platform}/ykushcmd`;
+        if (process.platform === 'win32') {
+            binpath += '.exe';
+        }
+        expect(Ykush.YkushCmd.endsWith(binpath)).to.be.true;
+        expect(fs.existsSync(binpath)).to.be.true;
+    });
+    it('HW list', async function () {
+        const list = await Ykush.list(logger);
+        expect(list).to.be.deep.equal([]);
+    });
+});
+
 describe('Ykush', function () {
+    let ykushCmdBack;
     const logger = {debug: () => {}, silly: () => {}};
     beforeEach(function () {
         stub(Ykush, 'execa');
+        ykushCmdBack = Ykush.YkushCmd;
+        Ykush.YkushCmd = 'ykushcmd';
         Ykush.execa.resolves({stdout: ''});
     });
     afterEach(function () {
         Ykush.execa.restore();
+        Ykush.YkushCmd = ykushCmdBack;
     });
     it('is ok', function () {
         const obj = new Ykush('123', {logger});
