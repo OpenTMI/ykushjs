@@ -42,9 +42,7 @@ defaults: &defaults
         key: dependency-cache-{{ checksum "_tmp_file" }}-{{ checksum "package.json" }}
     - run:
         name: npm-install
-        command: |
-          npm install
-          sudo bin/linux/install_udev.sh
+        command: npm install
     - save_cache:
         key: dependency-cache-{{ checksum "_tmp_file" }}-{{ checksum "package.json" }}
         paths:
