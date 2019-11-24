@@ -1,18 +1,28 @@
 # ykushjs
-Jepkit Ykush module
+Node.js module for [Yepkit Ykush USB switch](https://www.yepkit.com/products/ykush).
+Based on [ykushcmd](https://github.com/Yepkit/ykush).
+
+## Supported modules
+
+* [ykush](https://www.yepkit.com/products/ykush)
+* [ykushxs](https://www.yepkit.com/product/300115/YKUSHXS)
+* [ykush3](https://www.yepkit.com/product/300110/YKUSH3)
 
 
 ## Requirements
 * node 8, 10 or 12
-* `ykushcmd` - should be available in `$PATH` (https://github.com/Yepkit/ykush)
 
 ## API
 
 ```js
-const Ykush = require('Ykush');
-const listOfSerialNumbers = Ykush.detect();
-const ykush = new Ykush(listOfSerialNumbers[0]);
-ykush.powerOn({channel: 0})
-     .then(() => ykush
-     .powerOff({channel: 0});
+(() => async function() {
+    const Ykush = require('Ykush');
+    const listOfSerialNumbers = await Ykush.detect();
+    const ykush = new Ykush(listOfSerialNumbers[0]);
+    await ykush.powerOn({channel: 0});
+    await ykush.powerOff({channel: 0});
+    await ykush.powerAllOn();
+    await ykush.powerAllOff();
+    console.log(ykush.serialNumber);
+}())();
 ```
