@@ -8,6 +8,10 @@ workflows:
           filters:  # required since `deploy` has tag filters AND requires `build`
             tags:
               only: /.*/
+      - test-node12:
+          filters:  # required since `deploy` has tag filters AND requires `build`
+            tags:
+              only: /.*/
       - test-node-latest:
           filters:  # required since `deploy` has tag filters AND requires `build`
             tags:
@@ -15,6 +19,7 @@ workflows:
       - publish:
           requires:
             - test-node10
+            - test-node12
             - test-node-latest
           filters:
             tags:
@@ -37,7 +42,9 @@ defaults: &defaults
         key: dependency-cache-{{ checksum "_tmp_file" }}-{{ checksum "package.json" }}
     - run:
         name: npm-install
-        command: npm install
+        command: |
+          npm install
+          sudo bin/linux/install_udev.sh
     - save_cache:
         key: dependency-cache-{{ checksum "_tmp_file" }}-{{ checksum "package.json" }}
         paths:
@@ -67,6 +74,10 @@ defaults: &defaults
 jobs:
   test-node10:
     <<: *defaults
+  test-node-12:
+    <<: *defaults
+    docker:
+      - image: circleci/node:12.13.1
   test-node-latest:
     <<: *defaults
     docker:
