@@ -27,13 +27,21 @@ Based on [ykushcmd](https://github.com/Yepkit/ykush).
 
 ```js
 (() => async function() {
-    const Ykush = require('Ykush');
-    const listOfSerialNumbers = await Ykush.detect();
+    const {Ykush, Ykushxs} = require('Ykush');
+    
+    // ykush
+    let listOfSerialNumbers = await Ykush.list();
     const ykush = new Ykush(listOfSerialNumbers[0]);
     await ykush.powerOn({channel: 1});
     await ykush.powerOff({channel: 1});
     await ykush.powerAllOn();
     await ykush.powerAllOff();
     console.log(ykush.serialNumber);
+    
+    // ykushxs
+    listOfSerialNumbers = await Ykushxs.list();
+    const ykushxs = new Ykushxs(listOfSerialNumbers[0]);
+    await ykushxs.powerOn();
+    await ykushxs.powerOff();
 }())();
 ```
