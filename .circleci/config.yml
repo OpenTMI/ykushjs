@@ -74,7 +74,7 @@ defaults: &defaults
 jobs:
   test-node10:
     <<: *defaults
-  test-node-12:
+  test-node12:
     <<: *defaults
     docker:
       - image: circleci/node:12.13.1
