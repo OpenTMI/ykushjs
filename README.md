@@ -19,8 +19,8 @@ Based on [ykushcmd](https://github.com/Yepkit/ykush).
     const Ykush = require('Ykush');
     const listOfSerialNumbers = await Ykush.detect();
     const ykush = new Ykush(listOfSerialNumbers[0]);
-    await ykush.powerOn({channel: 0});
-    await ykush.powerOff({channel: 0});
+    await ykush.powerOn({channel: 1});
+    await ykush.powerOff({channel: 1});
     await ykush.powerAllOn();
     await ykush.powerAllOff();
     console.log(ykush.serialNumber);
