@@ -34,7 +34,9 @@ defaults: &defaults
     - image: circleci/node:10.14.1
   steps:
     - checkout
-    - run: node --version > _tmp_file
+    - run: |
+        node --version
+        node --version > _tmp_file
     - run:
         name: install libusb
         command: sudo apt install -y libusb-1.0-0
