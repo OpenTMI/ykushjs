@@ -10,7 +10,9 @@ Based on [ykushcmd](https://github.com/Yepkit/ykush).
 
 
 ## Requirements
+* linux, win64 or macos
 * node 8, 10 or 12
+
 
 ## API
 
