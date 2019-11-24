@@ -13,9 +13,9 @@ Based on [ykushcmd](https://github.com/Yepkit/ykush).
 * linux, win64 or macos
 * node 10 or 12
 
-** linux **
+**linux**
 * libusb: `sudo apt install -y libusb-1.0-0`
-* udev rules to be able to use without root access
+* udev rules to be able to use ykush without root access
 
     [Here](bin/linux/install_udev.sh) is simple udev rule installation script. To install it just run:
     ```
