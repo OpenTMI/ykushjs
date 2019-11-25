@@ -26,8 +26,10 @@ module.exports = class Ykush3 extends Ykush {
     }
 
     async writeGPIO({gpio, state}) {
-        invariant(['0', '1'].indexOf(state) !== -1, `invalid state: ${state}`);
+        gpio = `${gpio}`; // eslint-disable-line no-param-reassign
+        state = `${state}`; // eslint-disable-line no-param-reassign
         invariant(['1', '2', '3'].indexOf(gpio) !== -1, 'invalid gpio. Allowed values: 1,2,3');
+        invariant(['0', '1'].indexOf(state) !== -1, `invalid state: ${state}`);
         const args = [...this._prefix, '-s', this._serialNumber, '-w', gpio, state];
         return Ykush._runYkushCmd(args);
     }

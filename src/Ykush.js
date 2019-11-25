@@ -38,6 +38,7 @@ class Ykush {
     }
 
     _validateChannel(channel) {
+        channel = parseInt(channel, 10); // eslint-disable-line no-param-reassign
         invariant(channel > 0, 'invalid channel');
         invariant(channel <= this.channelCount, `allowed channels are 1..${this.channelCount}`);
     }
