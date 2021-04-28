@@ -28,12 +28,12 @@ class Ykush {
     }
 
     async powerAllOn() {
-        const args = [...this._prefix, '-s', this._serialNumber, '-u', 'a'];
+        const args = [...this._prefix, '-s', this._serialNumber.id, '-u', 'a'];
         return Ykush._runYkushCmd(args);
     }
 
     async powerAllOff() {
-        const args = [...this._prefix, '-s', this._serialNumber, '-d', 'a'];
+        const args = [...this._prefix, '-s', this._serialNumber.id, '-d', 'a'];
         return Ykush._runYkushCmd(args);
     }
 
@@ -45,13 +45,13 @@ class Ykush {
 
     async powerOn({channel}) {
         this._validateChannel(channel);
-        const args = [...this._prefix, '-s', this._serialNumber, '-u', `${channel}`];
+        const args = [...this._prefix, '-s', this._serialNumber.id, '-u', `${channel}`];
         return Ykush._runYkushCmd(args);
     }
 
     async powerOff({channel}) {
         this._validateChannel(channel);
-        const args = [...this._prefix, '-s', this._serialNumber, '-d', `${channel}`];
+        const args = [...this._prefix, '-s', this._serialNumber.id, '-d', `${channel}`];
         return Ykush._runYkushCmd(args);
     }
 
